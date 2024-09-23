@@ -1,10 +1,11 @@
 import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
-import dotenv, { config } from "dotenv"
+import dotenv from "dotenv"
 dotenv.config()
 
 import { postLogin, postSignup } from "./controllers/user.js"
+import { postPlant, getPlants, getPlant, updatePlant, deletePlant} from "./controllers/plant.js"
 
 const app = express()
 app.use(express.json())
@@ -28,8 +29,13 @@ app.get("/", (req, res) => {
 })
 
 app.post("/signup", postSignup);
-
 app.post("/login", postLogin);
+
+app.post("/plant", postPlant)
+app.get("/plants", getPlants)
+app.get("/plant/:id", getPlant)
+app.put("/plant/:id", updatePlant)
+app.delete("/plant/:id", deletePlant)
 
 const PORT = process.env.PORT || 5000
 
